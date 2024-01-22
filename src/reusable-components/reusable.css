@@ -1,0 +1,13 @@
+.formParent  .MuiGrid-item{
+    background: white;
+    padding: "20px";
+    border-radius: '5px';
+    z-index: '1'; /* Ensure the form appears above other elements */
+    max-width: '600px'; /* Set a maximum width for the form */
+    width: "100%"; /* Take up the full width of the container */
+    border: "1px solid red";
+    height: "550px";
+    overflow: "auto";
+
+  
+  }
