@@ -1,24 +1,11 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Grid } from '@mui/material';
 import './reusable.css';
+import MultiSelect from './MultiSelect';
 
-
-
-// const FormContainer = styled.div`
-//   background: white;
-//   padding: 20px;
-//   border-radius: 5px;
-// //   z-index: 1; /* Ensure the form appears above other elements */
-//   max-width: 600px; /* Set a maximum width for the form */
-//   width: 100%; /* Take up the full width of the container */
-//   border: 1px solid red;
-//   height: 550px;
-//   overflow: auto;
-
-// `;
-const Form1 = ({ textfieldata, xs }) => {
+const Form1 = ({ textfieldata, formNo, width,selectOptions }) => {
     const [formData, setFormData] = useState(textfieldata);
     const handleChange = (event, index) => {
         const updatedData = [...formData];
@@ -26,47 +13,45 @@ const Form1 = ({ textfieldata, xs }) => {
         setFormData(updatedData);
     };
 
-
-
     return (
         <>
-            <Grid container >
-                <Grid item  sx={{
-                    background: "white",
-                    padding: "20px",
-                    borderRadius: '5px',
-                    zIndex: '1', /* Ensure the form appears above other elements */
-                    maxWidth: '600px', /* Set a maximum width for the form */
-                    width: "100%", /* Take up the full width of the container */
-                    border: "1px solid red",
-                    height: "550px",
-                    overflow: "auto",
-                }}>
-                    <div >
-                        <h2>Step 1: Add Device  </h2>
-                        <form>
-                            <Grid container >
-                                {formData.map((data, index) => (
-                                    <Grid xs={xs}>
-                                        <TextField
-                                            key={index}
-                                            label={data.label}
-                                            value={data.value}
-                                            onChange={(event) => handleChange(event, index)}
-                                            fullWidth
-                                            margin="normal"
-                                        />
-                                    </Grid>
-                                ))}
-
-                            </Grid>
-                        </form>
-
-                    </div>
-                </Grid>
-            </Grid >
+            <div style={{
+                background: "white",
+                padding: "20px",
+                borderRadius: '5px',
+                maxWidth: '600px', /* Set a maximum width for the form */
+                border: "1px solid red",
+                height: "550px",
+                overflow: "auto",
+                display: "flex",
+                width: "30%",
+                float: "left"
+            }}>
+                <div >
+                    <h2>Form no. {formNo}</h2>
+                    <h2>Step 1: Add Device  </h2>
+                    <form>
+                        {formData.map((data, index) => (
+                            <div key={index} style={{display:"flex",width:width,float:"left"}}>
+                                <TextField
+                                    label={data.label}
+                                    value={data.value}
+                                    onChange={(event) => handleChange(event, index)}
+                                    fullWidth
+                                    margin="normal"
+                                />
+                            </div>
+                        ))}
+                        
+                           {selectOptions && <div style={{display:"flex",width:width,float:"left"}}>
+                                <MultiSelect options={selectOptions}/>
+                            </div>}
+                        
+                    </form>
+                </div>
+            </div>
         </>
     )
 }
 
-export default Form1
+export default Form1;
